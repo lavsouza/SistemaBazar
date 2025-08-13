@@ -82,7 +82,7 @@ public class OrgaoDonatarioRepository implements Repository<Integer, OrgaoDonata
     @Override
     public List<OrgaoDonatario> readAll() throws ClassNotFoundException, SQLException {
         List<OrgaoDonatario> lista = new ArrayList<>();
-        String sql = "SELECT id, nome, endereco, telefone, horario_funcionamento, descricao FROM orgao_donatario ORDER BY nome";
+        String sql = "SELECT * FROM orgao_donatario ORDER BY nome";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {

@@ -3,51 +3,51 @@ package web2.sistemabazar.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import web2.sistemabazar.model.classes.OrgaoDonatario;
+import web2.sistemabazar.model.classes.OrgaoFiscalizador;
 import web2.sistemabazar.model.repositories.RepositoryFacade;
 
 import java.sql.SQLException;
 
 @Controller
-@RequestMapping("/orgaodonatario")
-public class OrgaoDonatarioController {
+@RequestMapping("/orgaofiscalizador")
+public class OrgaoFiscalizadorController {
 
     private RepositoryFacade facade = RepositoryFacade.getCurrentInstance();
 
     @GetMapping
     public String listar(Model model) throws SQLException, ClassNotFoundException {
-        model.addAttribute("orgaos", facade.readAllOrgaoDonatarios());
-        return "orgaodonatario/lista";
+        model.addAttribute("orgaos", facade.readAllOrgaoFiscalizadores());
+        return "orgaofiscalizador/lista";
     }
 
     @GetMapping("/novo")
     public String novoForm(Model model) {
-        model.addAttribute("orgaoDonatario", new OrgaoDonatario());
-        return "orgaodonatario/form";
+        model.addAttribute("orgaofiscalizador", new OrgaoFiscalizador());
+        return "orgaofiscalizador/form";
     }
 
     @PostMapping("/salvar")
-    public String salvar(@ModelAttribute OrgaoDonatario orgao) throws SQLException, ClassNotFoundException {
+    public String salvar(@ModelAttribute OrgaoFiscalizador orgao) throws SQLException, ClassNotFoundException {
         if (orgao.getId() == 0) {
-            facade.createOrgaoDonatario(orgao);
+            facade.createOrgaoFiscalizador(orgao);
         } else {
-            facade.updateOrgaoDonatario(orgao);
+            facade.updateOrgaoFiscalizador(orgao);
         }
-        return "redirect:/orgaodonatario";
+        return "redirect:/orgaofiscalizador";
     }
 
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable int id, Model model) throws SQLException, ClassNotFoundException {
-        model.addAttribute("orgaoDonatario", facade.readOrgaoDonatario(id));
-        return "orgaodonatario/form";
+        model.addAttribute("orgaofiscalizador", facade.readOrgaoFiscalizador(id));
+        return "orgaofiscalizador/form";
     }
 
     @GetMapping("/excluir/{id}")
     public String excluir(@PathVariable int id) throws SQLException, ClassNotFoundException {
-        OrgaoDonatario o = facade.readOrgaoDonatario(id);
+        OrgaoFiscalizador o = facade.readOrgaoFiscalizador(id);
         if (o != null) {
-            facade.deleteOrgaoDonatario(o);
+            facade.deleteOrgaoFiscalizador(o);
         }
-        return "redirect:/orgaodonatario";
+        return "redirect:/orgaofiscalizador";
     }
 }
