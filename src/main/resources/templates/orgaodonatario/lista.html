@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Órgãos Donatários</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-4">
+    <h1 class="mb-4">Órgãos Donatários</h1>
+
+    <a th:href="@{/orgaodonatario/novo}" class="btn btn-primary mb-3">Novo Órgão Donatário</a>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Endereço</th>
+                <th>Telefone</th>
+                <th>Horário Funcionamento</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="orgao : ${orgaos}">
+                <td th:text="${orgao.id}"></td>
+                <td th:text="${orgao.nome}"></td>
+                <td th:text="${orgao.endereco}"></td>
+                <td th:text="${orgao.telefone}"></td>
+                <td th:text="${orgao.horarioFuncionamento}"></td>
+                <td th:text="${orgao.descricao}"></td>
+                <td>
+                    <a th:href="@{'/orgaodonatario/editar/' + ${orgao.id}}" class="btn btn-sm btn-warning me-1">Editar</a>
+                    <a th:href="@{'/orgaodonatario/excluir/' + ${orgao.id}}" class="btn btn-sm btn-danger"
+                       onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
