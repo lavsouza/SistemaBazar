@@ -1,13 +1,15 @@
 package web2.sistemabazar.model.classes;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Lote {
     private int id;
     private String observacao;
-    private Date dataEntrada;
-    private OrgaoDonatario orgaoDonatario;
-    private OrgaoFiscalizador orgaoFiscalizador;
+    private LocalDate dataEntrega;
+    private Integer idOrgaoDonatario;
+    private Integer idOrgaoFiscalizador;
+    private String orgaoDonatarioNome;
+    private String orgaoFiscalizadorNome;
 
     public int getId() {
         return id;
@@ -17,28 +19,28 @@ public class Lote {
         this.id = id;
     }
 
-    public OrgaoFiscalizador getOrgaoFiscalizador() {
-        return orgaoFiscalizador;
+    public int getIdOrgaoDonatario() {
+        return idOrgaoDonatario;
     }
 
-    public void setOrgaoFiscalizador(OrgaoFiscalizador orgaoFiscalizador) {
-        this.orgaoFiscalizador = orgaoFiscalizador;
+    public void setIdOrgaoDonatario(Integer idOrgaoDonatario) {
+        this.idOrgaoDonatario = idOrgaoDonatario;
     }
 
-    public OrgaoDonatario getOrgaoDonatario() {
-        return orgaoDonatario;
+    public int getIdOrgaoFiscalizador() {
+        return idOrgaoFiscalizador;
     }
 
-    public void setOrgaoDonatario(OrgaoDonatario orgaoDonatario) {
-        this.orgaoDonatario = orgaoDonatario;
+    public void setIdOrgaoFiscalizador(Integer idOrgaoFiscalizador) {
+        this.idOrgaoFiscalizador = idOrgaoFiscalizador;
     }
 
-    public Date getDataEntrada() {
-        return dataEntrada;
+    public LocalDate getDataEntrega() {
+        return dataEntrega;
     }
 
-    public void setDataEntrada(Date dataEntrada) {
-        this.dataEntrada = dataEntrada;
+    public void setDataEntrega(LocalDate dataEntrada) {
+        this.dataEntrega = dataEntrada;
     }
 
     public String getObservacao() {
@@ -47,5 +49,21 @@ public class Lote {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    public String getOrgaoDonatarioNome() {
+        return orgaoDonatarioNome;
+    }
+
+    public void setOrgaoDonatarioNome(String orgaoDonatarioNome) {
+        this.orgaoDonatarioNome = orgaoDonatarioNome;
+    }
+
+    public String getOrgaoFiscalizadorNome() {
+        return orgaoFiscalizadorNome;
+    }
+
+    public void setOrgaoFiscalizadorNome(String orgaoFiscalizadorNome) {
+        this.orgaoFiscalizadorNome = orgaoFiscalizadorNome;
     }
 }

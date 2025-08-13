@@ -1,5 +1,6 @@
 package web2.sistemabazar.model.repositories;
 
+import web2.sistemabazar.model.classes.Lote;
 import web2.sistemabazar.model.classes.OrgaoDonatario;
 import web2.sistemabazar.model.classes.OrgaoFiscalizador;
 
@@ -11,10 +12,12 @@ public class RepositoryFacade {
     private static RepositoryFacade instance;
     private OrgaoDonatarioRepository orgaoDonatarioRepository;
     private OrgaoFiscalizadorRepository orgaoFiscalizadorRepository;
+    private LoteRepository loteRepository;
 
     private RepositoryFacade() {
         this.orgaoDonatarioRepository = new OrgaoDonatarioRepository();
         this.orgaoFiscalizadorRepository = new OrgaoFiscalizadorRepository();
+        this.loteRepository = new LoteRepository();
     }
 
     public static RepositoryFacade getCurrentInstance() {
@@ -66,4 +69,26 @@ public class RepositoryFacade {
     public List<OrgaoFiscalizador> readAllOrgaoFiscalizadores() throws ClassNotFoundException, SQLException {
         return orgaoFiscalizadorRepository.readAll();
     }
+
+    // ============= CRUD - Lote =============
+    public void createLote(Lote l) throws ClassNotFoundException, SQLException {
+        loteRepository.create(l);
+    }
+
+    public void updateLote(Lote l) throws ClassNotFoundException, SQLException {
+        loteRepository.update(l);
+    }
+
+    public Lote readLote(int id) throws ClassNotFoundException, SQLException {
+        return loteRepository.read(id);
+    }
+
+    public void deleteLote(Lote l) throws ClassNotFoundException, SQLException {
+        loteRepository.delete(l);
+    }
+
+    public List<Lote> readAllLotes() throws ClassNotFoundException, SQLException {
+        return loteRepository.readAll();
+    }
+
 }
