@@ -3,6 +3,7 @@ package web2.sistemabazar.model.repositories;
 import web2.sistemabazar.model.classes.Lote;
 import web2.sistemabazar.model.classes.OrgaoDonatario;
 import web2.sistemabazar.model.classes.OrgaoFiscalizador;
+import web2.sistemabazar.model.classes.Produto;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -13,11 +14,13 @@ public class RepositoryFacade {
     private OrgaoDonatarioRepository orgaoDonatarioRepository;
     private OrgaoFiscalizadorRepository orgaoFiscalizadorRepository;
     private LoteRepository loteRepository;
+    private ProdutoRepository produtoRepository;
 
     private RepositoryFacade() {
         this.orgaoDonatarioRepository = new OrgaoDonatarioRepository();
         this.orgaoFiscalizadorRepository = new OrgaoFiscalizadorRepository();
         this.loteRepository = new LoteRepository();
+        this.produtoRepository = new ProdutoRepository();
     }
 
     public static RepositoryFacade getCurrentInstance() {
@@ -93,6 +96,31 @@ public class RepositoryFacade {
 
     public List<Lote> buscarLotePorDonatarioEFiscalizador(Integer cd, Integer cf) throws ClassNotFoundException, SQLException {
         return loteRepository.buscarLotePorDonatarioEFiscalizador(cd, cf);
+    }
+
+    // ============= CRUD - Produto =============
+    public void createProduto(Produto p) throws ClassNotFoundException, SQLException {
+        produtoRepository.create(p);
+    }
+
+    public void updateProduto(Produto p) throws ClassNotFoundException, SQLException {
+        produtoRepository.update(p);
+    }
+
+    public Produto readProduto(int id) throws ClassNotFoundException, SQLException {
+        return produtoRepository.read(id);
+    }
+
+    public void deleteProduto(Produto p) throws ClassNotFoundException, SQLException {
+        produtoRepository.delete(p);
+    }
+
+    public List<Produto> readAllProdutos() throws ClassNotFoundException, SQLException {
+        return produtoRepository.readAll();
+    }
+
+    public List<Produto> buscarProdutoPorLote(Integer l) throws ClassNotFoundException, SQLException {
+        return produtoRepository.buscarProdutoPorLote(l);
     }
 
 }

@@ -4,14 +4,14 @@ public class Produto {
     private int codigo;
     private String nome;
     private String descricao;
-    private Lote lote;
+    private Integer idLote;
 
-    public Lote getLote() {
-        return lote;
+    public Integer getIdLote() {
+        return idLote;
     }
 
-    public void setLote(Lote lote) {
-        this.lote = lote;
+    public void setIdLote(Integer idLote) {
+        this.idLote = idLote;
     }
 
     public String getDescricao() {
