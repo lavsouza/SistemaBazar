@@ -91,4 +91,8 @@ public class RepositoryFacade {
         return loteRepository.readAll();
     }
 
+    public List<Lote> buscarLotePorDonatarioEFiscalizador(Integer cd, Integer cf) throws ClassNotFoundException, SQLException {
+        return loteRepository.buscarLotePorDonatarioEFiscalizador(cd, cf);
+    }
+
 }

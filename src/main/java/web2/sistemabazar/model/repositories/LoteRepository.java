@@ -122,6 +122,52 @@ public class LoteRepository implements Repository<Integer, Lote> {
         return lista;
     }
 
+    public List<Lote> buscarLotePorDonatarioEFiscalizador(Integer cd, Integer cf)
+            throws ClassNotFoundException, SQLException {
+
+        List<Lote> lista = new ArrayList<>();
+        StringBuilder sql = new StringBuilder("""
+        SELECT
+            l.id AS lote_id,
+            l.data_entrega,
+            l.observacao,
+            od.id AS od_id,
+            od.nome AS od_nome,
+            ofi.id AS of_id,
+            ofi.nome AS of_nome
+        FROM lote l
+        JOIN orgao_donatario od ON l.cod_donatario = od.id
+        JOIN orgao_fiscalizador ofi ON l.cod_fiscal = ofi.id
+        WHERE 1=1
+    """);
+
+        if (cd != null) {
+            sql.append(" AND l.cod_donatario = ?");
+        }
+        if (cf != null) {
+            sql.append(" AND l.cod_fiscal = ?");
+        }
+
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql.toString())) {
+
+            int paramIndex = 1;
+            if (cd != null) {
+                ps.setInt(paramIndex++, cd);
+            }
+            if (cf != null) {
+                ps.setInt(paramIndex++, cf);
+            }
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(DTO(rs));
+                }
+            }
+        }
+        return lista;
+    }
+
     private Lote DTO(ResultSet rs) throws SQLException {
         Lote l = new Lote();
         l.setId(rs.getInt("lote_id"));

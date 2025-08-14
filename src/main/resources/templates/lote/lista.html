@@ -12,6 +12,29 @@
   <a th:href="@{/lote/novo}" class="btn btn-primary mb-3">Novo Lote</a>
   <a th:href="@{/}" class="btn btn-secondary ms-2">Voltar</a>
 
+  <form th:action="@{/lote/filtrar-lotes}" method="get" class="row g-3 mb-4">
+    <div class="col-md-4">
+      <label for="cd" class="form-label">Órgão Donatário</label>
+      <select id="cd" name="cd" class="form-select">
+        <option value="">Selecione...</option>
+        <option th:each="od : ${orgaosDonatarios}" th:value="${od.id}" th:text="${od.nome}" th:selected="${od.id == cf}"></option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label for="cf" class="form-label">Órgão Fiscalizador</label>
+      <select id="cf" name="cf" class="form-select">
+        <option value="">Selecione...</option>
+        <option th:each="of : ${orgaosFiscalizadores}" th:value="${of.id}" th:text="${of.nome}" th:selected="${of.id == cf}"></option>
+      </select>
+    </div>
+
+    <div class="col-md-4 d-flex align-items-end">
+      <button type="submit" class="btn btn-primary me-2">Filtrar</button>
+      <a th:href="@{/lote/filtrar-lotes}" class="btn btn-outline-secondary">Limpar</a>
+    </div>
+  </form>
+
   <div class="table-responsive">
     <table class="table table-bordered table-hover align-middle">
       <thead class="table-dark">
@@ -36,6 +59,9 @@
           <a th:href="@{'/lote/excluir/' + ${lote.id}}" class="btn btn-sm btn-danger"
              onclick="return confirm('Tem certeza que deseja excluir este lote?');">Excluir</a>
         </td>
+      </tr>
+      <tr th:if="${#lists.isEmpty(lotes)}">
+        <td colspan="6" class="text-center">Nenhum lote encontrado.</td>
       </tr>
       </tbody>
     </table>

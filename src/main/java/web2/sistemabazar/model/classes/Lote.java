@@ -1,6 +1,8 @@
 package web2.sistemabazar.model.classes;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Lote {
     private int id;
@@ -10,6 +12,15 @@ public class Lote {
     private Integer idOrgaoFiscalizador;
     private String orgaoDonatarioNome;
     private String orgaoFiscalizadorNome;
+    private List<Produto> produtos = new ArrayList<Produto>();
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
 
     public int getId() {
         return id;
@@ -19,15 +30,15 @@ public class Lote {
         this.id = id;
     }
 
-    public int getIdOrgaoDonatario() {
-        return idOrgaoDonatario;
+    public String getOrgaoFiscalizadorNome() {
+        return orgaoFiscalizadorNome;
     }
 
-    public void setIdOrgaoDonatario(Integer idOrgaoDonatario) {
-        this.idOrgaoDonatario = idOrgaoDonatario;
+    public void setOrgaoFiscalizadorNome(String orgaoFiscalizadorNome) {
+        this.orgaoFiscalizadorNome = orgaoFiscalizadorNome;
     }
 
-    public int getIdOrgaoFiscalizador() {
+    public Integer getIdOrgaoFiscalizador() {
         return idOrgaoFiscalizador;
     }
 
@@ -39,16 +50,16 @@ public class Lote {
         return dataEntrega;
     }
 
-    public void setDataEntrega(LocalDate dataEntrada) {
-        this.dataEntrega = dataEntrada;
+    public void setDataEntrega(LocalDate dataEntrega) {
+        this.dataEntrega = dataEntrega;
     }
 
-    public String getObservacao() {
-        return observacao;
+    public Integer getIdOrgaoDonatario() {
+        return idOrgaoDonatario;
     }
 
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
+    public void setIdOrgaoDonatario(Integer idOrgaoDonatario) {
+        this.idOrgaoDonatario = idOrgaoDonatario;
     }
 
     public String getOrgaoDonatarioNome() {
@@ -59,11 +70,11 @@ public class Lote {
         this.orgaoDonatarioNome = orgaoDonatarioNome;
     }
 
-    public String getOrgaoFiscalizadorNome() {
-        return orgaoFiscalizadorNome;
+    public List<Produto> getProdutos() {
+        return produtos;
     }
 
-    public void setOrgaoFiscalizadorNome(String orgaoFiscalizadorNome) {
-        this.orgaoFiscalizadorNome = orgaoFiscalizadorNome;
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 }

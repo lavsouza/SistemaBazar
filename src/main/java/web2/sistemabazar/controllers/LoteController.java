@@ -4,10 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web2.sistemabazar.model.classes.Lote;
-import web2.sistemabazar.model.classes.OrgaoDonatario;
-import web2.sistemabazar.model.classes.OrgaoFiscalizador;
-import web2.sistemabazar.model.repositories.OrgaoDonatarioRepository;
-import web2.sistemabazar.model.repositories.OrgaoFiscalizadorRepository;
 import web2.sistemabazar.model.repositories.RepositoryFacade;
 import java.sql.SQLException;
 
@@ -20,6 +16,8 @@ public class LoteController {
     @GetMapping
     public String listar(Model model) throws SQLException, ClassNotFoundException {
         model.addAttribute("lotes", facade.readAllLotes());
+        model.addAttribute("orgaosDonatarios", facade.readAllOrgaoDonatarios());
+        model.addAttribute("orgaosFiscalizadores", facade.readAllOrgaoFiscalizadores());
         return "lote/lista";
     }
 
@@ -47,6 +45,18 @@ public class LoteController {
         model.addAttribute("orgaosDonatarios", facade.readAllOrgaoDonatarios());
         model.addAttribute("orgaosFiscalizadores", facade.readAllOrgaoFiscalizadores());
         return "lote/form";
+    }
+
+    @GetMapping("/filtrar-lotes")
+    public String filtrarLotes(Model model,
+                               @RequestParam(required = false) Integer cd,
+                               @RequestParam(required = false) Integer cf) throws SQLException, ClassNotFoundException {
+        model.addAttribute("lotes", facade.buscarLotePorDonatarioEFiscalizador(cd, cf));
+        model.addAttribute("orgaosDonatarios", facade.readAllOrgaoDonatarios());
+        model.addAttribute("orgaosFiscalizadores", facade.readAllOrgaoFiscalizadores());
+        model.addAttribute("cd", cd);
+        model.addAttribute("cf", cf);
+        return "lote/lista";
     }
 
     @GetMapping("/excluir/{id}")
