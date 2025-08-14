@@ -1,8 +1,6 @@
 package web2.sistemabazar.model.repositories;
 
 import web2.sistemabazar.model.classes.Lote;
-import web2.sistemabazar.model.classes.OrgaoDonatario;
-import web2.sistemabazar.model.classes.OrgaoFiscalizador;
 import web2.sistemabazar.util.ConnectionManager;
 
 import java.sql.*;
@@ -13,24 +11,20 @@ public class LoteRepository implements Repository<Integer, Lote> {
 
     @Override
     public void create(Lote l) throws ClassNotFoundException, SQLException {
-        String sql = "INSERT INTO lote (data_entrega, observacao, cod_donatario, cod_fiscal) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO lote (data_entrega, observacao, cod_donatario, cod_fiscal) " +
+                "VALUES (?, ?, ?, ?) RETURNING id";
 
         try (Connection conn = ConnectionManager.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setDate(1, java.sql.Date.valueOf(l.getDataEntrega()));
             ps.setString(2, l.getObservacao());
             ps.setInt(3, l.getIdOrgaoDonatario());
             ps.setInt(4, l.getIdOrgaoFiscalizador());
 
-            int affectedRows = ps.executeUpdate();
-            if (affectedRows == 0) {
-                throw new SQLException("Criação de Lote falhou, nenhuma linha afetada.");
-            }
-
-            try (ResultSet rs = ps.getGeneratedKeys()) {
+            try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    l.setId(rs.getInt(1));
+                    l.setId(rs.getInt("id"));
                 }
             }
         }

@@ -28,7 +28,7 @@
             <label for="idLote" class="form-label">Lote</label>
             <select id="idLote" th:field="*{idLote}" class="form-select" required>
                 <option value="">Selecione...</option>
-                <option th:each="l : ${lotes}" th:value="${l.id}" th:text="${l.id}"></option>
+                <option th:each="l : ${lotes}" th:value="${l.id}" th:text="${l.observacao}"></option>
             </select>
             <div class="invalid-feedback">Por favor, selecione um lote</div>
         </div>
